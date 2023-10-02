@@ -4,26 +4,37 @@ package Entidades;
 
 public class Paciente {
    private String nombre, apellido, domicilio;
-   int dni,idPaciente, telefono;
+   private int dni,idPaciente, telefono;
+   private boolean estado;
 
     public Paciente() {
     }
 
-    public Paciente(int idPaciente,String nombre, String apellido, String domicilio, int dni,  int telefono) {
+    public Paciente(int idPaciente,String nombre, String apellido, String domicilio, int dni,  int telefono,boolean estado) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.domicilio = domicilio;
         this.dni = dni;
         this.idPaciente = idPaciente;
         this.telefono = telefono;
+        this.estado=estado;
     }
 
-    public Paciente(String nombre, String apellido, String domicilio, int dni, int telefono) {
+    public Paciente(String nombre, String apellido, String domicilio, int dni, int telefono,boolean estado) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.domicilio = domicilio;
         this.dni = dni;
         this.telefono = telefono;
+        this.estado=estado;
+    }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
 
     public String getNombre() {
