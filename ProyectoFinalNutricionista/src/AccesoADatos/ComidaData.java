@@ -96,7 +96,23 @@ public class ComidaData {
     }
     public ArrayList<Comida> buscarPorCalorias   (int calorias){
         ArrayList<Comida> listaC=new ArrayList<>();
-        
+        String sql="SELECT * FROM `comida` WHERE cantCalorias<?";
+        try {
+            PreparedStatement ps=conexion.prepareStatement(sql);
+            ps.setInt(1, calorias);
+            ResultSet rs=ps.executeQuery();
+            while(rs.next()){
+                int cal=rs.getInt("cantCalorias");
+                String nombre=rs.getString("nombre");
+                String detalle=rs.getString("detalle");
+                Comida comida=new Comida(cal, nombre, detalle);
+                listaC.add(comida);
+            }
+            ps.close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ComidaData.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         
         return listaC;  

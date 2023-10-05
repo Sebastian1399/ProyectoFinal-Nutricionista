@@ -20,7 +20,7 @@ public class ProyectoFinalNutricionista {
     //pd.eliminarPaciente(1);
     //pd.rehabilitarPaciente(1);
 //    Comida comida=new Comida(450, "tallarines con salsa", "porcion de tallarines con salsa filetto");
-//    ComidaData cd=new ComidaData();
+    ComidaData cd=new ComidaData();
 //    for(Comida com:cd.listarComidas()){
 //        System.out.println(com);
 
@@ -32,7 +32,11 @@ public class ProyectoFinalNutricionista {
     //dd.guardarDieta();
     //dd.modificarDieta(d1);
     //dd.eliminarDieta(13);
-    dd.rehabilitarDieta(13);
-    
+   // dd.rehabilitarDieta(13);
+//    for(Comida d:cd.buscarPorCalorias(3600)){
+//        System.out.println(d);
+//    }
+//    }
+System.out.println(pd.buscarPorId(1));
     }
 }  

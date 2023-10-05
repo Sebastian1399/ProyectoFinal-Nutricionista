@@ -3,6 +3,9 @@ package AccesoADatos;
 
 import Entidades.Paciente;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 
@@ -89,4 +92,65 @@ public class PacienteData {
         }
 
     }
+        public ArrayList<Paciente> listarPacientes(){
+            String sql="select * from paciente";
+           ArrayList listaP=new ArrayList();
+        try {
+           
+            PreparedStatement ps=conexion.prepareStatement(sql);
+            ResultSet rs=ps.executeQuery();
+            while(rs.next()){
+                String nombre=rs.getString("nombre");
+                String apellido=rs.getString("apellido");
+                String domicilio=rs.getString("domicilio");
+                int dni=rs.getInt("dni");
+                int telefono=rs.getInt("telefono");
+                Paciente p1=new Paciente(nombre, apellido, domicilio, dni,  telefono, true);
+                listaP.add(p1);
+            }
+           ps.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(PacienteData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+        
+        return listaP;
+        }     
+        public Paciente buscarPorId(int id){
+            String sql="select * from paciente where idPaciente=?";
+            Paciente p1=null;
+        try {
+            PreparedStatement ps=conexion.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs=ps.executeQuery();
+            if(rs.next()){
+                String nombre=rs.getString("nombre");
+                String apellido=rs.getString("apellido");
+                String domicilio=rs.getString("dni");
+                int dni=rs.getInt("dni");
+                int telefono=rs.getInt("telefono");
+                
+              p1=new Paciente(nombre, apellido, domicilio, dni, telefono, true);  
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PacienteData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+          return p1;  
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
 }
