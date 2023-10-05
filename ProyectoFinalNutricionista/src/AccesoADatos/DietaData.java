@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 
@@ -20,12 +21,11 @@ public class DietaData {
    
     }
     
-public void guardarDieta(Dieta dieta) {
+ public void guardarDieta(Dieta dieta) {
         try {
             String sql = "INSERT INTO dieta (idPaciente, nombre, fechaInicio, fechaFinal, pesoInicial, pesoBuscado, pesoActual, estado)"
                     + " VALUES (?,?,?,?,?,?,?,?)";
             PreparedStatement ps=conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            //ps.setInt(1, dieta.getIdDieta());
             ps.setInt(1, dieta.getPaciente().getIdPaciente());
             ps.setString(2, dieta.getNombre());
             ps.setDate(3, Date.valueOf(dieta.getFechaInicio()));
@@ -103,7 +103,35 @@ public void rehabilitarDieta(int id) {
         }
 
     }         
+
+        public ArrayList<Dieta> listarDietas(){
+        ArrayList<Dieta> listaD=new ArrayList();
+        
+        String sql="SELECT * FROM dieta";
+        try {
+            PreparedStatement ps=conexion.prepareStatement(sql);
+            ResultSet rs=ps.executeQuery();
+            while (rs.next()){
+
+                Dieta dieta=new Dieta();
+                dieta.setPaciente(PacienteData.buscarPorId(rs.getInt("idPaciente")));
+                dieta.setNombre(rs.getString("nombre"));
+                dieta.setFechaInicio(rs.getDate("fechaInicio").toLocalDate());
+                dieta.setFechaFinal(rs.getDate("fechaFinal").toLocalDate());
+                dieta.setPesoInicial(rs.getDouble("pesoInicial"));
+                dieta.setPesoBuscado(rs.getDouble("pesoBuscado"));
+                dieta.setPesoActual(rs.getDouble("pesoActual"));
+                
+                listaD.add(dieta);
+              
+            }
+            ps.close();
+        } catch (SQLException ex) {
+             JOptionPane.showMessageDialog(null, "error al acceder a la tabla dieta");
+           
+        }
+        return listaD;
     
-    
+     }   
     
 }

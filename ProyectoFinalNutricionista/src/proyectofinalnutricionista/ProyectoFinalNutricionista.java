@@ -33,10 +33,10 @@ public class ProyectoFinalNutricionista {
     //dd.modificarDieta(d1);
     //dd.eliminarDieta(13);
    // dd.rehabilitarDieta(13);
-//    for(Comida d:cd.buscarPorCalorias(3600)){
-//        System.out.println(d);
-//    }
-//    }
-System.out.println(pd.buscarPorId(1));
+    for(Dieta dieta:dd.listarDietas()){
+        System.out.println(dieta);
+  }
+    
+//System.out.println(pd.buscarPorId(1));
     }
 }  
