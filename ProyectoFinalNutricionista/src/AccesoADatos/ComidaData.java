@@ -95,7 +95,7 @@ public class ComidaData {
      
     }
     public ArrayList<Comida> buscarPorCalorias   (int calorias){
-        ArrayList<Comida> listaC;
+        ArrayList<Comida> listaC=new ArrayList<>();
         
         
         

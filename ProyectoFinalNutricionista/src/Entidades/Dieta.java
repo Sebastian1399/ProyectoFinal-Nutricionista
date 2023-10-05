@@ -5,25 +5,28 @@ import java.time.LocalDate;
 
 
 public class Dieta {
-    private int idDieta;
+  private int idDieta;
     private Paciente paciente;
     private String nombre;
     LocalDate fechaInicio, fechaFinal;
     private double pesoInicial, pesoBuscado, pesoActual;
-
+    private boolean estado;
+    
     public Dieta() {
     }
 
-    public Dieta(Paciente paciente, String nombre, LocalDate fechaInicio, LocalDate fechaFinal, double pesoInicial, double pesoBuscado) {
+    public Dieta(Paciente paciente, String nombre, LocalDate fechaInicio, LocalDate fechaFinal, double pesoInicial, double pesoBuscado, double pesoActual, boolean estado) {
         this.paciente = paciente;
         this.nombre = nombre;
         this.fechaInicio = fechaInicio;
         this.fechaFinal = fechaFinal;
         this.pesoInicial = pesoInicial;
         this.pesoBuscado = pesoBuscado;
+        this.pesoActual = pesoActual;
+        this.estado = estado;
     }
 
-    public Dieta(int idDieta, Paciente paciente, String nombre, LocalDate fechaInicio, LocalDate fechaFinal, double pesoInicial, double pesoBuscado) {
+    public Dieta(int idDieta, Paciente paciente, String nombre, LocalDate fechaInicio, LocalDate fechaFinal, double pesoInicial, double pesoBuscado, double pesoActual, boolean estado) {
         this.idDieta = idDieta;
         this.paciente = paciente;
         this.nombre = nombre;
@@ -31,6 +34,8 @@ public class Dieta {
         this.fechaFinal = fechaFinal;
         this.pesoInicial = pesoInicial;
         this.pesoBuscado = pesoBuscado;
+        this.pesoActual = pesoActual;
+        this.estado = estado;
     }
 
     public int getIdDieta() {
@@ -97,9 +102,17 @@ public class Dieta {
         this.pesoActual = pesoActual;
     }
 
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
     @Override
     public String toString() {
-        return "Dieta{" + "paciente=" + paciente.getApellido()+" "+paciente.getNombre() + ", nombre=" + nombre + ", fechaInicio=" + fechaInicio + ", fechaFinal=" + fechaFinal + ", pesoInicial=" + pesoInicial + '}';
+        return "Dieta{" + "paciente=" + paciente + ", nombre=" + nombre + '}';
     }
 
 

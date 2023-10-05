@@ -72,4 +72,21 @@ public class PacienteData {
         }
 
     }
+    
+        public void rehabilitarPaciente(int id) {
+        String sql = "update paciente set estado=1 where idPaciente=?";
+       
+        PreparedStatement ps;
+        try {
+            ps = conexion.prepareStatement(sql);
+            ps.setInt(1, id);
+            int exito = ps.executeUpdate();
+            if (exito == 1) {
+                JOptionPane.showMessageDialog(null, "Paciente agregado");
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "error al acceder a la tabla paciente");
+        }
+
+    }
 }
