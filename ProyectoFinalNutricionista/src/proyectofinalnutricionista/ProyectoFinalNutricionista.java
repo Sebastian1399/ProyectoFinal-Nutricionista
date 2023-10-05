@@ -1,8 +1,9 @@
 
 package proyectofinalnutricionista;
 
+import AccesoADatos.ComidaData;
 import AccesoADatos.PacienteData;
-import Entidades.Paciente;
+import Entidades.*;
 
 
 public class ProyectoFinalNutricionista {
@@ -14,8 +15,12 @@ public class ProyectoFinalNutricionista {
     //pd.guardarPaciente(p1);
     
     //pd.modificarPaciente(p1);
-    pd.eliminarPaciente(1);
-    
+    //pd.eliminarPaciente(1);
+    Comida comida=new Comida(450, "tallarines con salsa", "porcion de tallarines con salsa filetto");
+    ComidaData cd=new ComidaData();
+    for(Comida com:cd.listarComidas()){
+        System.out.println(com);
+    }
     }
     
 }
