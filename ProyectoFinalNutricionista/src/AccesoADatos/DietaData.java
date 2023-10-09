@@ -114,7 +114,8 @@ public void rehabilitarDieta(int id) {
             while (rs.next()){
 
                 Dieta dieta=new Dieta();
-                dieta.setPaciente(PacienteData.buscarPorId(rs.getInt("idPaciente")));
+                PacienteData pd=new PacienteData();
+                dieta.setPaciente(pd.buscarPorId(rs.getInt("idPaciente")));
                 dieta.setNombre(rs.getString("nombre"));
                 dieta.setFechaInicio(rs.getDate("fechaInicio").toLocalDate());
                 dieta.setFechaFinal(rs.getDate("fechaFinal").toLocalDate());
