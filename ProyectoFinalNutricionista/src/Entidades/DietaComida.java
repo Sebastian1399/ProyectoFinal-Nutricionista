@@ -7,18 +7,22 @@ import java.util.*;
 public class DietaComida {
     private int idDietaComida;
     private Dieta dieta;
-   // private ArrayList<Comida> listaC;
+    private Comida comida;
+   //private ArrayList<Comida> listaC;
 
     public DietaComida() {
+      
     }
 
-    public DietaComida(int idDietaComida, Dieta dieta) {
+    public DietaComida(Dieta dieta, Comida comida) {
+        this.dieta = dieta;
+        this.comida = comida;
+    }
+
+    public DietaComida(int idDietaComida, Dieta dieta, Comida comida) {
         this.idDietaComida = idDietaComida;
         this.dieta = dieta;
-    }
-
-    public DietaComida(Dieta dieta) {
-        this.dieta = dieta;
+        this.comida = comida;
     }
 
     public int getIdDietaComida() {
@@ -36,5 +40,20 @@ public class DietaComida {
     public void setDieta(Dieta dieta) {
         this.dieta = dieta;
     }
+
+    public Comida getComida() {
+        return comida;
+    }
+
+    public void setComida(Comida comida) {
+        this.comida = comida;
+    }
+
+    @Override
+    public String toString() {
+        return "DietaComida{" + "idDietaComida=" + idDietaComida + ", dieta=" + dieta + ", comida=" + comida + '}';
+    }
+
     
+   
 }
