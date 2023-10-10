@@ -62,59 +62,27 @@ public class DietaComidaData {
         }
         
     }     
-     
-           
-    public ArrayList<DietaComida> listarComiodasDeDietas(int idDieta,List<Integer> idComidas){
-        ArrayList<DietaComida> listaDC=new ArrayList();
-        
-        String sql="SELECT idDieta,comida.nombre  FROM dietacomida ";
-        try {
-            PreparedStatement ps=conexion.prepareStatement(sql);
-            ResultSet rs=ps.executeQuery();
-            while (rs.next()){
 
-                Dieta dieta=new Dieta();
-                Comida comida=new Comida();                
-                ps.setInt(1, idDieta);
-                ps.setString(1, comida.getNombre());
-                
-                
+    public List<String> listarNombresComidasPorIdDieta(int idDieta) {
+        List<String> nombresComidas = new ArrayList<>();
 
-            }
-            ps.close();
-        } catch (SQLException ex) {
-             JOptionPane.showMessageDialog(null, "error al acceder a la tabla dieta");
-           
-        }
-        return listaDC;
-    
-     }  
-    public List<Comida> listarDietaComida(int idDieta){
-    List<Comida> listaC = new ArrayList<>();
-        
-        String sql="SELECT comida.idComida,comida.nombre , comida.cantCalorias , comida.detalle FROM dietacomida join comida on dietaComida.idComida=comida.idComida where idDieta=?;";
+        String sql = "SELECT comida.nombre " +
+                     "FROM dietaComida " +
+                     "JOIN comida ON dietaComida.idComida = comida.idComida " +
+                     "WHERE dietaComida.idDieta = ?";
         try {
-            PreparedStatement ps=conexion.prepareStatement(sql);
-            ResultSet rs=ps.executeQuery();
-            DietaData dd=new DietaData();
-            ComidaData cd=new ComidaData();
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setInt(1, idDieta);
+            ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                int calorias=rs.getInt("cantCalorias");
-                String nombre=rs.getString("nombre");
-                String detalle=rs.getString("detalle");
-              
-                listaC.add(new Comida(calorias,nombre,detalle));
+                String nombre = rs.getString("nombre");
+                nombresComidas.add(nombre);
             }
             ps.close();
-        } catch (SQLException ex) {
-             JOptionPane.showMessageDialog(null, "error al acceder a la tabla dieta");
-           
+        } catch (SQLException e) {
+                     JOptionPane.showMessageDialog(null, "error al acceder a la tabla dietacomida");
         }
-       return listaC;
-    
-     }
-    
 
-           
-           
+        return nombresComidas;
+    }
 }

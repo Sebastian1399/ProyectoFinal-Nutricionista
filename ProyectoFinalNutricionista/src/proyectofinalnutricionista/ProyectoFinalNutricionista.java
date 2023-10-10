@@ -6,6 +6,7 @@ import AccesoADatos.DietaComidaData;
 import AccesoADatos.DietaData;
 import AccesoADatos.PacienteData;
 import Entidades.*;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.List;
 public class ProyectoFinalNutricionista {
 
    
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
     PacienteData pd=new PacienteData();
     Paciente p1=new Paciente(1,"juan cruz", "Perez", "Olascoaga 7150", 35539000, 261209424,true);
     //pd.guardarPaciente(p1);
@@ -63,8 +64,8 @@ public class ProyectoFinalNutricionista {
    // dd.actualizarPeso(1, 90);
      //   System.out.println(dd.buscarDietaPorID(1));
      //   System.out.println(cd.buscarComidaPorId(1));
-   for(Comida c:dc.listarDietaComida(1)){
-       System.out.println(c);
+   for(String c:dc.listarNombresComidasPorIdDieta(15)){
+      System.out.println(c);
    }
     }
-}  
+}
