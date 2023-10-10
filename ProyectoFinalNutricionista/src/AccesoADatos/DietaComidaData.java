@@ -20,65 +20,7 @@ public class DietaComidaData {
    
     }
     
-    public void guardarDietaCoimida(DietaComida dietacomida) {
-        try {
-            String sql = "INSERT INTO DietaComida (idDieta, idComida)"
-                    + " VALUES (?,?)";
-            PreparedStatement ps=conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, dietacomida.getDieta().getIdDieta());
-            ps.setInt(2, dietacomida.getComida().getIdComida());
-            ps.executeUpdate();
-            
-            
-                        ResultSet rs = ps.getGeneratedKeys();
-            if (rs.next()) {
-                dietacomida.setIdDietaComida(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "DietaComida guardada exitosamente...");
-            }
-            ps.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "error al acceder a la tabla DietaComida");
-
-        }
-        
-    }
-    public void modificarDieta(DietaComida dietacomida) {
-         try {
-            String sql = "UPDATE dieta SET idDieta=?, idComida=?  WHERE idDietaComida=?";
-            PreparedStatement ps=conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, dietacomida.getDieta().getIdDieta());
-            ps.setInt(2, dietacomida.getComida().getIdComida());
-            ps.executeUpdate();
-            
-            int exito = ps.executeUpdate();
-            if (exito == 1) {
-                JOptionPane.showMessageDialog(null, "DietaComida modificada...");
-            }
-            ps.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "error al acceder a la tabla dietacomida");
-        }
-    }   
-    
-    public void eliminarDietaComida(DietaComida dietacomida) {
-        String sql = "DELETE FROM dietacomida WHERE idDieta=? AND idComida= ?";
-       
-        PreparedStatement ps;
-        try {
-            ps = conexion.prepareStatement(sql);
-            ps.setInt(1, dietacomida.getDieta().getIdDieta());
-            ps.setInt(2, dietacomida.getComida().getIdComida());
-            ps.executeUpdate();
-
-          
-             JOptionPane.showMessageDialog(null, "DietaComida eliminada");
-          
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "error al acceder a la tabla dieta");
-        }
-
-    }
-    
+ 
         public void agregarComidaAUnaDieta(int idDieta, List<Integer> idComidas) {
         String sql = "INSERT INTO dietacomida (idDieta, idComida) VALUES (?, ?)";
         PreparedStatement ps;
@@ -87,9 +29,10 @@ public class DietaComidaData {
             for (int idComida : idComidas) {
                 ps.setInt(1, idDieta);
                 ps.setInt(2, idComida);
-                ps.addBatch(); 
-                
-            JOptionPane.showMessageDialog(null, "DietaComida comida agregada");
+              // ps.addBatch(); 
+                 int exito=ps.executeUpdate();
+             if(exito==1){JOptionPane.showMessageDialog(null, "comida agregada a la lista...");
+              }    
             }
             ps.executeBatch();
 
@@ -101,42 +44,25 @@ public class DietaComidaData {
         
     }
         
-       public void borrarComidasDeUnaDieta(int idDieta)  {
-        String sql = "DELETE FROM dietacomida WHERE idDieta = ?";
+       public void borrarComidasDeUnaDieta(int idDieta, int idComida)  {
+        String sql = "DELETE FROM dietacomida WHERE idDieta = ? AND idComida=?";
         PreparedStatement ps;
        
         try {
             
             ps = conexion.prepareStatement(sql);
                  ps.setInt(1, idDieta);
-                
-              JOptionPane.showMessageDialog(null, "DietaComida comida eliminda");
-            
+                 ps.setInt(2, idComida);
+                 int exito=ps.executeUpdate();
+              if(exito==1){JOptionPane.showMessageDialog(null, "comida eliminda");
+              }
            
                } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "error al acceder a la tabla dietacomida");
         }
         
     }     
-           public void modificarComidasDeDieta(int idDieta, List<Integer> nuevaListaComidas){
-
-        borrarComidasDeUnaDieta(idDieta);
-        PreparedStatement ps;
-        
-        String sql = "INSERT INTO dietacomida (idDieta, idComida) VALUES (?, ?)";
-        try  {
-            ps = conexion.prepareStatement(sql);
-            for (int idComida : nuevaListaComidas) {
-                ps.setInt(1, idDieta);
-                ps.setInt(2, idComida);
-                ps.executeUpdate();
-                JOptionPane.showMessageDialog(null, "DietaComida comida modificada");
-            }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "error al acceder a la tabla dietacomida");
-        }
-        
-    }    
+     
            
     public ArrayList<DietaComida> listarComiodasDeDietas(int idDieta,List<Integer> idComidas){
         ArrayList<DietaComida> listaDC=new ArrayList();
@@ -163,7 +89,30 @@ public class DietaComidaData {
         return listaDC;
     
      }  
+    public List<Comida> listarDietaComida(int idDieta){
+    List<Comida> listaC = new ArrayList<>();
+        
+        String sql="SELECT comida.idComida,comida.nombre , comida.cantCalorias , comida.detalle FROM dietacomida join comida on dietaComida.idComida=comida.idComida where idDieta=?;";
+        try {
+            PreparedStatement ps=conexion.prepareStatement(sql);
+            ResultSet rs=ps.executeQuery();
+            DietaData dd=new DietaData();
+            ComidaData cd=new ComidaData();
+            while (rs.next()) {
+                int calorias=rs.getInt("cantCalorias");
+                String nombre=rs.getString("nombre");
+                String detalle=rs.getString("detalle");
+              
+                listaC.add(new Comida(calorias,nombre,detalle));
+            }
+            ps.close();
+        } catch (SQLException ex) {
+             JOptionPane.showMessageDialog(null, "error al acceder a la tabla dieta");
+           
+        }
+       return listaC;
     
+     }
     
 
            

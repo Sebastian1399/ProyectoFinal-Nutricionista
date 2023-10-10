@@ -117,4 +117,27 @@ public class ComidaData {
         
         return listaC;  
     }
+      
+public Comida buscarComidaPorId   (int idComida){
+     
+        String sql="SELECT * FROM `comida` WHERE idComida=?";
+        Comida comida=null;
+        try {
+            PreparedStatement ps=conexion.prepareStatement(sql);
+            ps.setInt(1, idComida);
+            ResultSet rs=ps.executeQuery();
+            while(rs.next()){
+                int cal=rs.getInt("cantCalorias");
+                String nombre=rs.getString("nombre");
+                String detalle=rs.getString("detalle");
+                comida=new Comida(cal, nombre, detalle);
+               
+            }
+            ps.close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ComidaData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+return comida;  
+    }
 }

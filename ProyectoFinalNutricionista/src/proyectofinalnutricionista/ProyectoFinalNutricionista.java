@@ -51,13 +51,20 @@ public class ProyectoFinalNutricionista {
    
      List<Integer> idComidas = new ArrayList<>();
             idComidas.add(1); 
-            //idComidas.add(3);
-            idComidas.add(6);
+            idComidas.add(3);
+            idComidas.add(2);
             
-    dc.agregarComidaAUnaDieta(15, idComidas);
-    //dc.borrarComidasDeUnaDieta(13);
+    //dc.agregarComidaAUnaDieta(1, idComidas);
+    //dc.borrarComidasDeUnaDieta(1,1);
+   // dc.borrarComidasDeUnaDieta(1,2);
+    //dc.borrarComidasDeUnaDieta(1,3);
     //dc.modificarComidasDeDieta(15, idComidas);
     //dc.listarComiodasDeDietas(15, idComidas);
-    
+   // dd.actualizarPeso(1, 90);
+     //   System.out.println(dd.buscarDietaPorID(1));
+     //   System.out.println(cd.buscarComidaPorId(1));
+   for(Comida c:dc.listarDietaComida(1)){
+       System.out.println(c);
+   }
     }
 }  
