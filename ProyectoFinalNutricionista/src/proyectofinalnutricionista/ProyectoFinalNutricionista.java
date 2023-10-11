@@ -6,10 +6,13 @@ import AccesoADatos.DietaComidaData;
 import AccesoADatos.DietaData;
 import AccesoADatos.PacienteData;
 import Entidades.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 
 public class ProyectoFinalNutricionista {
@@ -23,10 +26,10 @@ public class ProyectoFinalNutricionista {
     //pd.modificarPaciente(p1);
     //pd.eliminarPaciente(1);
     //pd.rehabilitarPaciente(1);
-      Comida comida3=new Comida(6,550, "tallarines con salsa", "porcion de tallarines con salsa magnossss");
-      Comida comida2=new Comida(3,550, "tallarines con salsa", "porcion de tallarines con salsa magno");
-      Comida comida=new Comida(1,450, "tallarines con salsa", "porcion de tallarines con salsa filetto");
-      ComidaData cd=new ComidaData();
+//      Comida comida3=new Comida(6,550, "tallarines con salsa", "porcion de tallarines con salsa magnossss");
+//      Comida comida2=new Comida(3,550, "tallarines con salsa", "porcion de tallarines con salsa magno");
+//      Comida comida=new Comida(1,450, "tallarines con salsa", "porcion de tallarines con salsa filetto");
+//      ComidaData cd=new ComidaData();
       //cd.guardarComida(comida3);
 //    for(Comida com:cd.listarComidas()){
 //        System.out.println(com);
@@ -47,13 +50,13 @@ public class ProyectoFinalNutricionista {
 //    
 //System.out.println(pd.buscarPorId(1));
 
-   DietaComidaData dc=new DietaComidaData();
- 
-   
-     List<Integer> idComidas = new ArrayList<>();
-            idComidas.add(1); 
-            idComidas.add(3);
-            idComidas.add(2);
+//   DietaComidaData dc=new DietaComidaData();
+// 
+//   
+//     List<Integer> idComidas = new ArrayList<>();
+//            idComidas.add(1); 
+//            idComidas.add(3);
+//            idComidas.add(2);
             
     //dc.agregarComidaAUnaDieta(1, idComidas);
     //dc.borrarComidasDeUnaDieta(1,1);
@@ -64,8 +67,6 @@ public class ProyectoFinalNutricionista {
    // dd.actualizarPeso(1, 90);
      //   System.out.println(dd.buscarDietaPorID(1));
      //   System.out.println(cd.buscarComidaPorId(1));
-   for(String c:dc.listarNombresComidasPorIdDieta(15)){
-      System.out.println(c);
-   }
     }
-}
+    }
+
