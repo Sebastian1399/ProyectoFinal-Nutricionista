@@ -178,5 +178,35 @@ public void rehabilitarDieta(int id) {
             System.out.println(d1);
           return d1; 
         }
+        public ArrayList<Dieta> listarPacientesPorPeso(){
+        ArrayList<Dieta> listaD=new ArrayList();
+        
+        String sql="SELECT dieta.* FROM dieta JOIN paciente on dieta.idPaciente=paciente.idPaciente where fechaFinal>?";
+        try {
+            PreparedStatement ps=conexion.prepareStatement(sql);
+            ResultSet rs=ps.executeQuery();
+            while (rs.next()){
+
+                Dieta dieta=new Dieta();
+                PacienteData pd=new PacienteData();
+                
+                dieta.setPaciente(pd.buscarPorId(rs.getInt("idPaciente")));
+                dieta.setFechaInicio(rs.getDate("fechaInicio").toLocalDate());
+                dieta.setFechaFinal(rs.getDate("fechaFinal").toLocalDate());
+                dieta.setPesoInicial(rs.getDouble("pesoInicial"));
+                dieta.setPesoBuscado(rs.getDouble("pesoBuscado"));
+                dieta.setPesoActual(rs.getDouble("pesoActual"));
+                
+                listaD.add(dieta);
+              
+            }
+            ps.close();
+        } catch (SQLException ex) {
+             JOptionPane.showMessageDialog(null, "error al acceder a la tabla dieta");
+           
+        }
+        return listaD;
+    
+     }
     
 }
