@@ -64,7 +64,7 @@ public class ProyectoFinalNutricionista {
    // dd.actualizarPeso(1, 90);
      //   System.out.println(dd.buscarDietaPorID(1));
      //   System.out.println(cd.buscarComidaPorId(1));
-   for(String c:dc.listarNombresComidasPorIdDieta(15)){
+   for(String c:dc.listarNombresComidasPorIdDieta(1)){
       System.out.println(c);
    }
     }
