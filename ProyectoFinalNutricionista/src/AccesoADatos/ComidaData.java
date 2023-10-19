@@ -57,13 +57,13 @@ public class ComidaData {
             JOptionPane.showMessageDialog(null, "error al acceder a la tabla Comida");
         }
     }
-    public void eliminarComida(Comida comida){
+    public void eliminarComida(int idComida){
              String sql = "DELETE FROM comida WHERE idComida=?";
        
         PreparedStatement ps;
         try {
             ps = conexion.prepareStatement(sql);
-            ps.setInt(1, comida.getIdComida());
+            ps.setInt(1, idComida);
             int exito = ps.executeUpdate();
             if (exito == 1) {
                 JOptionPane.showMessageDialog(null, "Comida eliminada");
@@ -80,10 +80,11 @@ public class ComidaData {
             PreparedStatement ps=conexion.prepareStatement(sql);
             ResultSet rs=ps.executeQuery();
             while (rs.next()){
+                int idComida=rs.getInt("idComida");
                 int calorias=rs.getInt("cantCalorias");
                 String nombre=rs.getString("nombre");
                 String detalle=rs.getString("detalle");
-                Comida comida=new Comida(calorias, nombre, detalle);
+                Comida comida=new Comida(idComida,calorias, nombre, detalle);
                 listaC.add(comida);
             }
             ps.close();
